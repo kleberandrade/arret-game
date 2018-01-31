@@ -18,7 +18,7 @@ public class TransmissionTower : MonoBehaviour
 
     public Renderer m_IconRenderer;
 
-    public Renderer m_CircleRenderer;
+    public Renderer m_ShieldRenderer;
 
     private List<RayLaser> m_LaserList = new List<RayLaser>();
 
@@ -30,9 +30,7 @@ public class TransmissionTower : MonoBehaviour
         m_IconRenderer.material.SetColor("_EmissionColor", m_Color);
         m_IconRenderer.material.EnableKeyword("_Emission");
 
-        m_CircleRenderer.material.SetColor("_Color", m_Color);
-        m_CircleRenderer.material.SetColor("_EmissionColor", m_Color);
-        m_CircleRenderer.material.EnableKeyword("_Emission");
+        m_ShieldRenderer.material.SetColor("_MainColor", m_Color);
     }
 
 	private void CheckTowersAround()

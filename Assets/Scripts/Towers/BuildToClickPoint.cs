@@ -26,6 +26,8 @@ public class BuildToClickPoint : MonoBehaviour
     private void Start()
     {
         m_NextCooldownTime = Time.time + m_CooldownTime;
+        if (!m_CooldownSlider)
+            return;
         m_CooldownSlider.minValue = 0;
         m_CooldownSlider.maxValue = 1;
         m_CooldownSlider.value = 0.0f;
@@ -37,7 +39,8 @@ public class BuildToClickPoint : MonoBehaviour
         m_CanBuilder = m_CurrentCooldownTime >= m_NextCooldownTime;
 
         float cooldown = 1.0f - (m_NextCooldownTime - m_CurrentCooldownTime) / m_CooldownTime;
-        m_CooldownSlider.value = cooldown;
+        if (m_CooldownSlider)
+            m_CooldownSlider.value = cooldown;
 
         if (!m_CanBuilder)
             return;
@@ -46,11 +49,13 @@ public class BuildToClickPoint : MonoBehaviour
 		{
 			RaycastHit hit;
 
-			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000.0f, m_GroundLayer)) {
-
+			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000.0f, m_GroundLayer))
+            {
 				Collider[] colliders = Physics.OverlapSphere (hit.point, m_MinDistanceToBuild, m_TowerLayer);
-				if (colliders.Length == 0)
-					BuildManager.Instance.GetTower (hit.point + m_Offset, m_Color);
+                if (colliders.Length == 0)
+                {
+                    BuildManager.Instance.GetTower(hit.point + m_Offset, m_Color);
+                }
 			}
 
             m_CanBuilder = false;

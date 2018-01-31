@@ -14,21 +14,37 @@ public class RayLaser : MonoBehaviour
 
 	public float m_MakeLaserTime = 0.3f;
 
-    public float m_ScrollSpeed = 1.0f;
-
-    public float m_SmoothScale = 0.1f;
+    public float m_Rate = 1.0f;
 
     private LineRenderer m_LineRenderer;
 
-    private Renderer m_Renderer;
-
 	private Transform m_EndPoint;
+
+    private Material m_Material;
+
+    private WaitForSeconds m_Wait;
 
     private void Awake()
 	{
 		m_LineRenderer = GetComponent<LineRenderer> ();
-        m_Renderer = GetComponent<Renderer>();
+        m_Material = m_LineRenderer.sharedMaterial;
+        m_Wait = new WaitForSeconds(m_Rate);
 	}
+
+    public void Start()
+    {
+        m_LineRenderer.startWidth = m_WidthRay;
+        m_LineRenderer.endWidth = m_WidthRay;
+        StartCoroutine(UpdateLighting());
+    }
+
+    private IEnumerator UpdateLighting()
+    {
+        yield return m_Wait;
+        m_Material.mainTextureOffset = new Vector2(Random.Range(-0.5f, 0.5f), 1);
+        m_Material.mainTextureScale = new Vector2(Random.Range(-0.5f, 0.5f), 1);
+        StartCoroutine(UpdateLighting());
+    } 
 
 	private void OnEnable()
 	{
@@ -40,26 +56,17 @@ public class RayLaser : MonoBehaviour
 		BuildManager.OnTowerDestroy -= OnTowerDestroy;	
 	}
 
-	private void Start()
-	{
-		m_LineRenderer.startWidth = m_WidthRay;
-		m_LineRenderer.endWidth = m_WidthRay;
-    }
-
 	public void SetEndPoint(Transform endPoint, Color color)
 	{
 		m_EndPoint = endPoint;
+
+        m_Material.SetColor("_TintColor", color);
 
         m_LineRenderer.SetPosition(0, transform.position);
         m_LineRenderer.SetPosition(1, transform.position);
 
         m_LineRenderer.startColor = ColorExtension.AlphaColor(color, m_StartAlpha);
         m_LineRenderer.endColor = ColorExtension.AlphaColor(color, m_EndAlpha);
-
-        m_Renderer = GetComponent<Renderer>();
-        m_Renderer.material.SetColor("_Color", color);
-        m_Renderer.material.SetColor("_EmissionColor", color);
-        m_Renderer.material.EnableKeyword("_Emission");
 
         StartCoroutine (MakeLaser ());
 	}
@@ -105,13 +112,4 @@ public class RayLaser : MonoBehaviour
 		if (m_EndPoint == null || Vector3.Distance(m_EndPoint.position, position) <= float.Epsilon)
 			Destroy (gameObject);
 	}
-
-    private void Update()
-    {
-        float distance = Vector3.Distance(transform.position, m_EndPoint.position);
-        float offset = Time.time * (m_ScrollSpeed / distance);
-
-        m_LineRenderer.material.SetTextureScale("_MainTex", new Vector2(m_SmoothScale / distance, 1.0f));
-        m_LineRenderer.material.SetTextureOffset("_MainTex", new Vector2(-offset, 0.0f));
-    }
 }

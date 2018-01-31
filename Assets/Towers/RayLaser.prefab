@@ -52,12 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e876aa15a8400149bd5ffd8b2ca873f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_WidthRay: 2
+  m_WidthRay: 3
   m_StartAlpha: 0.8
-  m_EndAlpha: 0.3
+  m_EndAlpha: 0
   m_MakeLaserTime: 0.3
-  m_ScrollSpeed: 15
-  m_SmoothScale: 1
+  m_Rate: 0.05
 --- !u!120 &120475829249087492
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -72,7 +71,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 044fb24a2a723f94bb10bd5c793735eb, type: 2}
+  - {fileID: 2100000, guid: 137ca6418c7d608499b0de34d6f1b622, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,7 +102,13 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 0.7117119
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.9999999
+        value: 0.99
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -113,7 +118,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 0.69411767}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
