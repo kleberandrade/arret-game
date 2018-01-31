@@ -25,11 +25,11 @@ MonoBehaviour:
         motionVectorsResolution: 24
         motionVectorsAmplitude: 64
   fog:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       excludeSkybox: 1
   antialiasing:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       method: 0
       fxaaSettings:
@@ -40,7 +40,7 @@ MonoBehaviour:
         stationaryBlending: 0.95
         motionBlending: 0.85
   ambientOcclusion:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       intensity: 0.54
       radius: 0.47
@@ -83,7 +83,7 @@ MonoBehaviour:
       sampleCount: 10
       frameBlending: 0
   eyeAdaptation:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       lowPercent: 45
       highPercent: 95
@@ -97,7 +97,7 @@ MonoBehaviour:
       logMin: -8
       logMax: 4
   bloom:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       bloom:
         intensity: 0.5
@@ -109,7 +109,7 @@ MonoBehaviour:
         texture: {fileID: 0}
         intensity: 3
   colorGrading:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       tonemapping:
         tonemapper: 1
