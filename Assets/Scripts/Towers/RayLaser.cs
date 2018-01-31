@@ -56,10 +56,10 @@ public class RayLaser : MonoBehaviour
         m_LineRenderer.startColor = ColorExtension.AlphaColor(color, m_StartAlpha);
         m_LineRenderer.endColor = ColorExtension.AlphaColor(color, m_EndAlpha);
 
-        Renderer rend = GetComponent<Renderer>();
-        rend.material.SetColor("_Color", color);
-        rend.material.SetColor("_EmissionColor", color);
-        rend.material.EnableKeyword("_Emission");
+        m_Renderer = GetComponent<Renderer>();
+        m_Renderer.material.SetColor("_Color", color);
+        m_Renderer.material.SetColor("_EmissionColor", color);
+        m_Renderer.material.EnableKeyword("_Emission");
 
         StartCoroutine (MakeLaser ());
 	}

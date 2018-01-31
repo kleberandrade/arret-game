@@ -2,7 +2,7 @@
 
 public class LookAtTarget : MonoBehaviour
 {
-    private GameObject m_Target;
+    public GameObject m_Target;
 
     private void Update()
     {
