@@ -57,7 +57,7 @@ namespace ANET
                 }
             }
 
-            public void Play(uint gameMode)
+            public void MakeMatch(uint gameMode)
             {
                 JSONObject payload = new JSONObject();
                 payload.AddField("action", "makematch");

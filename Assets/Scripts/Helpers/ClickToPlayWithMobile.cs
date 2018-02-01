@@ -15,6 +15,6 @@ public class ClickToPlayWithMobile : MonoBehaviour {
     {
         gameModePanel.SetActive(false);
         preloadPanel.SetActive(true);
-        Networking.Instance.Play(GameMode.MOBILE);
+        Networking.Instance.MakeMatch(GameMode.MOBILE);
     }
 }

@@ -15,6 +15,6 @@ public class ClickToPlayWithVR : MonoBehaviour {
     {
         gameModePanel.SetActive(false);
         preloadPanel.SetActive(true);
-        Networking.Instance.Play(GameMode.VR);
+        Networking.Instance.MakeMatch(GameMode.VR);
     }
 }
