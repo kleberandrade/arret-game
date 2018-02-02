@@ -23,10 +23,10 @@ namespace ANET
             #endregion
 
             #region Privates Fields
+            private bool host = false;
             private SocketIOComponent io;
-            #endregion
-
             private List<GameObject> networked = new List<GameObject> ();
+            #endregion
 
             #region Public Properties
             static public Networking Instance
@@ -34,6 +34,14 @@ namespace ANET
                 get
                 {
                     return _instance;
+                }
+            }
+
+            public bool Host
+            {
+                get
+                {
+                    return host;
                 }
             }
 
@@ -78,10 +86,12 @@ namespace ANET
                     io.On("action", new Action<SocketIOEvent>((SocketIOEvent evt) => {
                         string action = evt.data.GetField("action").str;
                         JSONObject payload = evt.data.GetField("payload");
-                        Debug.Log("ACTION: "+action);
+                        // Debug.Log("ACTION: "+action);
 
                         if (action == "joinRoom")
                         {
+                            host = payload.GetField("host").b;
+                            Debug.Log("HOST: " + Host);
                             BroadcastAMessage("OnJoinRoom", payload);
                         }
                         else if (action == "abortGame")
@@ -95,7 +105,7 @@ namespace ANET
             public void Register(GameObject go)
             {
                 networked.Add(go);
-                Debug.Log(networked.Count);
+                // Debug.Log(networked.Count);
             }
 
             public void BroadcastAMessage(string methodName,JSONObject payload)
@@ -110,7 +120,7 @@ namespace ANET
                     else
                     {
                         GameObject go = networked[i];
-                        Debug.Log("Carai:" + go);
+                        // Debug.Log("Carai:" + go);
                         if (go)
                         {
                             Debug.Log(go.GetComponent<INetworkBehaviour>().GetType());

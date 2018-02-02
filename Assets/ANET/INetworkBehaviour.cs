@@ -11,7 +11,7 @@ namespace ANET
 
             void Start()
             {
-                Debug.Log(this is INetworkBehaviour);
+                // Debug.Log(this is INetworkBehaviour);
                 Networking.Instance.Register(gameObject);
             }
 
