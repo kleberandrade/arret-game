@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SocketIO;
+using System;
 
 namespace ANET
 {
@@ -22,9 +23,10 @@ namespace ANET
             #endregion
 
             #region Privates Fields
-            [SerializeField]
-            private SocketIOComponent io = null;
+            private SocketIOComponent io;
             #endregion
+
+            private List<GameObject> networked = new List<GameObject> ();
 
             #region Public Properties
             static public Networking Instance
@@ -34,17 +36,35 @@ namespace ANET
                     return _instance;
                 }
             }
+
+            public SocketIOComponent IO
+            {
+                get
+                {
+                    return io;
+                }
+
+                set
+                {
+                    io = value;
+
+                    if(!io.IsConnected)
+                        Connect();
+                }
+            }
             #endregion
 
             #region Unity Interface
             private void Awake()
             {
-                _instance = this;
-            }
-
-            private void Start()
-            {
-                Instance.Connect();
+                if (_instance)
+                {
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    _instance = this;
+                }
             }
             #endregion
 
@@ -54,6 +74,55 @@ namespace ANET
                 if (io)
                 {
                     io.Connect();
+
+                    io.On("action", new Action<SocketIOEvent>((SocketIOEvent evt) => {
+                        string action = evt.data.GetField("action").str;
+                        JSONObject payload = evt.data.GetField("payload");
+                        Debug.Log("ACTION: "+action);
+
+                        if (action == "joinRoom")
+                        {
+                            BroadcastAMessage("OnJoinRoom", payload);
+                        }
+                        else if (action == "abortGame")
+                        {
+                            BroadcastAMessage("OnGameAbort", payload);
+                        }
+                    }));
+                }
+            }
+
+            public void Register(GameObject go)
+            {
+                networked.Add(go);
+                Debug.Log(networked.Count);
+            }
+
+            public void BroadcastAMessage(string methodName,JSONObject payload)
+            {
+                bool vai = true;
+                for (int i = 0; vai;)
+                {
+                    if(i >= networked.Count)
+                    {
+                        vai = false;
+                    }
+                    else
+                    {
+                        GameObject go = networked[i];
+                        Debug.Log("Carai:" + go);
+                        if (go)
+                        {
+                            Debug.Log(go.GetComponent<INetworkBehaviour>().GetType());
+                            go.BroadcastMessage(methodName, payload);
+                            i++;
+                        }
+                        else
+                        {
+                            networked.RemoveAt(i);
+                        }
+                    }
+                    
                 }
             }
 

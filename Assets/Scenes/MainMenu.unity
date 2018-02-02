@@ -309,6 +309,22 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 195977024}
+--- !u!1 &207801421 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1998670548477616, guid: 7bb3d93fda38e1c478004f2ef44e262c,
+    type: 2}
+  m_PrefabInternal: {fileID: 905879669}
+--- !u!114 &207801422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 207801421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c2d3cf5aed21142b90ca848cdae6d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &254679160
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +943,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4399165241466166, guid: 7bb3d93fda38e1c478004f2ef44e262c, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114611815921527702, guid: 7bb3d93fda38e1c478004f2ef44e262c,
         type: 2}
@@ -948,6 +964,7 @@ GameObject:
   - component: {fileID: 963240394}
   - component: {fileID: 963240397}
   - component: {fileID: 963240396}
+  - component: {fileID: 963240398}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -979,7 +996,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &963240396
 MonoBehaviour:
@@ -1007,6 +1024,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameModePanel: {fileID: 254679160}
   preloadPanel: {fileID: 770012827}
+--- !u!114 &963240398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 963240393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57781df517da6ce45937207f25627b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preloadTextMessage: {fileID: 1756264505}
 --- !u!1 &1083193195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,6 +1094,21 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!1 &1086220278 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 010d39cbd03ee4c99a746c1f8ecdc0d8, type: 2}
+  m_PrefabInternal: {fileID: 1466927847}
+--- !u!114 &1086220279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1086220278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3eb0a75860ca2c4eb25e72fb3ea4eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1159041170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,7 +1256,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1466927847
 Prefab:
@@ -1251,7 +1295,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 010d39cbd03ee4c99a746c1f8ecdc0d8, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 010d39cbd03ee4c99a746c1f8ecdc0d8, type: 2}
       propertyPath: autoConnect
@@ -1259,7 +1303,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 010d39cbd03ee4c99a746c1f8ecdc0d8, type: 2}
       propertyPath: url
-      value: ws://127.0.0.1:8000/socket.io/?EIO=4&transport=websocket
+      value: ws://arretggj2018.herokuapp.com/socket.io/?EIO=4&transport=websocket
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 010d39cbd03ee4c99a746c1f8ecdc0d8, type: 2}
@@ -1324,7 +1368,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1581555229
 GameObject:
@@ -1389,7 +1433,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1756264503
 GameObject:
@@ -1683,7 +1727,7 @@ RectTransform:
   - {fileID: 254679161}
   - {fileID: 770012828}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
