@@ -11,15 +11,17 @@ public class OnJoinedRoom : INetworkBehaviour {
     [SerializeField]
     private Text preloadTextMessage = null;
 
-	override public void OnJoinRoom(JSONObject payload)
+    public override void OnJoinRoom(JSONObject payload)
     {
         // Se start game 
         if (payload.GetField("startgame").b)
         {
-            if(preloadTextMessage)
+            if (preloadTextMessage)
                 preloadTextMessage.text = "GAME STARTING";
 
             SceneManager.LoadSceneAsync("Gameplay");
         }
     }
+
+
 }

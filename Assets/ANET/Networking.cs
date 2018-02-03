@@ -25,7 +25,7 @@ namespace ANET
             #region Privates Fields
             private bool host = false;
             private SocketIOComponent io;
-            private List<GameObject> networked = new List<GameObject> ();
+            public List<GameObject> networked = new List<GameObject> ();
             #endregion
 
             #region Public Properties
@@ -97,6 +97,15 @@ namespace ANET
                         else if (action == "abortGame")
                         {
                             BroadcastAMessage("OnGameAbort", payload);
+                        }else if(action == "gameplayLoaded")
+                        {
+                            BroadcastAMessage("OnGameplayLoaded", payload);
+                        }else if (action == "setColor")
+                        {
+                            BroadcastAMessage("OnColorSet", payload);
+                        }else if(action == "placeDrone")
+                        {
+                            BroadcastAMessage("OnDronePlace", payload);
                         }
                     }));
                 }
@@ -113,7 +122,7 @@ namespace ANET
                 bool vai = true;
                 for (int i = 0; vai;)
                 {
-                    if(i >= networked.Count)
+                    if(i > networked.Count)
                     {
                         vai = false;
                     }
@@ -123,7 +132,7 @@ namespace ANET
                         // Debug.Log("Carai:" + go);
                         if (go)
                         {
-                            Debug.Log(go.GetComponent<INetworkBehaviour>().GetType());
+                            // Debug.Log(go.GetComponent<INetworkBehaviour>().GetType()+", "+methodName);
                             go.BroadcastMessage(methodName, payload);
                             i++;
                         }
@@ -144,13 +153,33 @@ namespace ANET
                 if(gameMode == GameMode.MOBILE)
                 {
                     payload.AddField("type", "mobile");
-                    io.Emit("action",payload);
                 }else if(gameMode == GameMode.VR)
                 {
                     payload.AddField("type", "vr");
-                    io.Emit("action",payload);
                 }
-                
+
+                io.Emit("action",payload);
+
+            }
+
+            public void GameplaySceneLoaded()
+            {
+                JSONObject payload = new JSONObject();
+                payload.AddField("action", "gameplayLoaded");
+
+                io.Emit("action",payload);
+            }
+
+            public void PlaceDrone(Vector3 position)
+            {
+                JSONObject payload = new JSONObject();
+                payload.AddField("action", "placeDrone");
+
+                payload.AddField("x", position.x);
+                payload.AddField("y", position.y);
+                payload.AddField("z", position.z);
+
+                io.Emit("action", payload);
             }
             #endregion
 
