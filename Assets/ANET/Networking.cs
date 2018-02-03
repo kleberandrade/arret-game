@@ -97,15 +97,25 @@ namespace ANET
                         else if (action == "abortGame")
                         {
                             BroadcastAMessage("OnGameAbort", payload);
-                        }else if(action == "gameplayLoaded")
+                        }
+                        else if(action == "gameplayLoaded")
                         {
                             BroadcastAMessage("OnGameplayLoaded", payload);
-                        }else if (action == "setColor")
+                            if (payload.GetField("start").b)
+                            {
+                                BroadcastAMessage("OnMatchStarted", null);
+                            }
+                        }
+                        else if (action == "setColor")
                         {
                             BroadcastAMessage("OnColorSet", payload);
-                        }else if(action == "placeDrone")
+                        }
+                        else if(action == "placeDrone")
                         {
                             BroadcastAMessage("OnDronePlace", payload);
+                        }else if(action == "tick")
+                        {
+                            BroadcastAMessage("OnTick", payload);
                         }
                     }));
                 }
@@ -113,36 +123,32 @@ namespace ANET
 
             public void Register(GameObject go)
             {
-                networked.Add(go);
+                if(!networked.Contains(go))
+                    networked.Add(go);
                 // Debug.Log(networked.Count);
             }
 
             public void BroadcastAMessage(string methodName,JSONObject payload)
             {
-                bool vai = true;
-                for (int i = 0; vai;)
+                networked.RemoveAll((GameObject item) => {
+                   return item == null;
+                });
+
+                foreach(GameObject go in networked)
                 {
-                    if(i > networked.Count)
+                    
+                    if (payload)
                     {
-                        vai = false;
+                        go.SendMessage(methodName, payload);
                     }
                     else
                     {
-                        GameObject go = networked[i];
-                        // Debug.Log("Carai:" + go);
-                        if (go)
-                        {
-                            // Debug.Log(go.GetComponent<INetworkBehaviour>().GetType()+", "+methodName);
-                            go.BroadcastMessage(methodName, payload);
-                            i++;
-                        }
-                        else
-                        {
-                            networked.RemoveAt(i);
-                        }
+                        go.SendMessage(methodName);
                     }
-                    
+                    //Debug.Log(methodName+", "+go.name);
                 }
+                Debug.Log("-------------------");
+
             }
 
             public void MakeMatch(uint gameMode)
@@ -166,6 +172,14 @@ namespace ANET
             {
                 JSONObject payload = new JSONObject();
                 payload.AddField("action", "gameplayLoaded");
+
+                io.Emit("action",payload);
+            }
+
+            public void Tick()
+            {
+                JSONObject payload = new JSONObject();
+                payload.AddField("action", "tick");
 
                 io.Emit("action",payload);
             }

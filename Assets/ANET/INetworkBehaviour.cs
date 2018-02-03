@@ -12,7 +12,8 @@ namespace ANET
             public virtual void Start()
             {
                 // Debug.Log(this is INetworkBehaviour);
-                Networking.Instance.Register(gameObject);
+                if(Networking.Instance)
+                    Networking.Instance.Register(gameObject);
             }
 
             public virtual void OnConnected()
@@ -80,6 +81,26 @@ namespace ANET
 
             }
 
+            /**
+             * Notifica o client de que a partida comecou
+             */
+            public virtual void OnMatchStarted()
+            {
+
+            }
+
+            /**
+             * Notifica o client do tempo total da partida
+             * {
+             *  m : int, // minutos
+             *  s : int, // segundos
+             *  t : int  // tempo total em segundos
+             * }
+             */
+            public virtual void OnTick(JSONObject payload)
+            {
+
+            }
         }
     }
 }

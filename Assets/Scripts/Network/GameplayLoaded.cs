@@ -9,7 +9,8 @@ public class GameplayLoaded : INetworkBehaviour {
     override public void Start()
     {
         base.Start();
-        Networking.Instance.GameplaySceneLoaded(); // notifica o sv que terminei de carregar a cena de gameplay
+        if(Networking.Instance)
+            Networking.Instance.GameplaySceneLoaded(); // notifica o sv que terminei de carregar a cena de gameplay
     }
 
     public override void OnGameplayLoaded(JSONObject payload)
@@ -17,7 +18,7 @@ public class GameplayLoaded : INetworkBehaviour {
         // Se o game comecou
         if (payload.GetField("start").b)
         {
-            Debug.Log("A partida comecou!");
+            Debug.Log("Bugiga!");
             // TO-DO: Fazer alguma coias pra indicar que o game comecou
         }
     }
