@@ -18,7 +18,11 @@ namespace ARRET
         private bool started = false;
 
         [SerializeField]
+        [Tooltip("Defines if Timer must start automatically or not. Leave unckhed so it will be initialized by OnMatchStart Event (network).")]
         private bool autoStart = false;
+        [SerializeField]
+        [Tooltip("Difference between the server match time and the client match time allowed. If the client time is lower than server's or higher than server's by this amount, Timer will reconciliate its time.")]
+        private int reconciliationThreshold = 1;
 
         #endregion
 
@@ -100,7 +104,7 @@ namespace ARRET
         {
             // Debug.Log("SV: "+ payload.GetField("t").n+", CL: "+elapsedSeconds);
             int sv = (int) payload.GetField("t").n;
-            if(elapsedSeconds+1 < sv || elapsedSeconds-1 > sv)
+            if(elapsedSeconds + reconciliationThreshold < sv || elapsedSeconds - reconciliationThreshold > sv)
             {
                 elapsedSeconds = sv;
                 field.text = Format();
