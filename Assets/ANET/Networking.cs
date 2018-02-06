@@ -226,6 +226,16 @@ namespace ANET
 
                 io.Emit("action", payload);
             }
+
+            public void DestroyDrone(int droneId)
+            {
+                JSONObject payload = new JSONObject();
+                payload.AddField("action", "destroyDrone");
+
+                payload.AddField("droneId", droneId);
+
+                io.Emit("action", payload);
+            }
             #endregion
 
 

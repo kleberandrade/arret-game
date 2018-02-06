@@ -22,6 +22,8 @@ public class OnDronePlaced : INetworkBehaviour {
         go.GetComponent<TransmissionTower>().DroneId = (int) payload.GetField("droneId").n;
 
         TransmissionTower tower = go.GetComponent<TransmissionTower>();
+        tower.Mine = false; // o drone colocado pela rede nao eh meu.. x(
+
         if(payload.GetField("color").str.ToString() == "blue")
         {
             tower.m_Color = BuildToClickPoint.Instance.m_BlueColor;

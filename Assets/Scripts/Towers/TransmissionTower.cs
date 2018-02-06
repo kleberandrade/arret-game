@@ -33,7 +33,11 @@ public class TransmissionTower : MonoBehaviour
 
     public int DroneId;
 
+    public bool Mine = true;
+
     private List<RayLaser> m_LaserList = new List<RayLaser>();
+
+    
 
 	private void Start()
 	{
@@ -75,4 +79,9 @@ public class TransmissionTower : MonoBehaviour
 		Gizmos.color = ColorExtension.AlphaColor (m_Color, m_AlphaColor);
 		Gizmos.DrawSphere(transform.position, m_RayDistance);
 	}
+
+    public void OnClick()
+    {
+
+    }
 }

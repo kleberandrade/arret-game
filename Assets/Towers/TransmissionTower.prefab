@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 135658858121036694}
   - component: {fileID: 114162263298652304}
   - component: {fileID: 114486875645251286}
+  - component: {fileID: 114731373203269420}
   m_Layer: 8
   m_Name: TransmissionTower
   m_TagString: Untagged
@@ -4056,6 +4057,7 @@ MonoBehaviour:
     type: 2}
   m_IconRenderer: {fileID: 23241697422754552}
   m_ShieldRenderer: {fileID: 23971114525340148}
+  DroneId: 0
 --- !u!114 &114238188576674380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -26970,6 +26972,20 @@ MonoBehaviour:
   m_selectedFaces: 
   m_SelectedEdges: []
   m_selectedTriangles: 
+--- !u!114 &114731373203269420
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1157803479110254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232b74879a5b8074480c0a3ce490fc21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &114732688140684784
 MonoBehaviour:
   m_ObjectHideFlags: 1
