@@ -19,7 +19,8 @@ public class GameplayLoaded : INetworkBehaviour {
         if (payload.GetField("start").b)
         {
             Debug.Log("Bugiga!");
-            // TO-DO: Fazer alguma coias pra indicar que o game comecou
+            TransmissionTower.IdReset(); // reseta os ids dos drones pois comecou nova partida
+            // TO-DO: Fazer alguma coisa pra indicar que o game comecou
         }
     }
 }

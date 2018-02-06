@@ -21,4 +21,11 @@ public class OnGameAborted : INetworkBehaviour {
 
         SceneManager.LoadSceneAsync("MainMenu");
     }
+
+    public override void OnServerDisconection()
+    {
+        connectionLostScreen.transform.Find("Message").GetComponent<Text>().text = "Something went wrong! Connection lost. Try again in a few minutes.";
+        connectionLostScreen.SetActive(true);
+        SceneManager.LoadSceneAsync("MainMenu");
+    }
 }

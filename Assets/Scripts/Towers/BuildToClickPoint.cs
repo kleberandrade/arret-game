@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using ANET.Networking;
+
 public class BuildToClickPoint : MonoBehaviour 
 {
 	public LayerMask m_GroundLayer;
 
 	public LayerMask m_TowerLayer;
 
-	public Color m_Color = Color.white;
+	public Color m_BlueColor    = Color.white;
+    public Color m_RedColor     = Color.white;
+    public Color m_Color        = Color.white;
 
-	public Vector3 m_Offset = Vector3.up;
+    public Vector3 m_Offset = Vector3.up;
 
     public float m_CooldownTime = 5.0f;
 
@@ -22,6 +26,19 @@ public class BuildToClickPoint : MonoBehaviour
 	public float m_MinDistanceToBuild = 2.0f;
 
     public Slider m_CooldownSlider;
+
+    public static BuildToClickPoint Instance;
+
+    public void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogError("BuildManager: existe mais de uma instancia ativa.");
+            return;
+        }
+
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -47,19 +64,34 @@ public class BuildToClickPoint : MonoBehaviour
 
 		if (Input.GetMouseButtonDown(0)) 
 		{
-			RaycastHit hit;
-
-			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000.0f, m_GroundLayer))
+            if (!Networking.Instance.Host) // So quem nao for o host pode construir pois o host é sempre o VR (q nao constroi xD)
             {
-				Collider[] colliders = Physics.OverlapSphere (hit.point, m_MinDistanceToBuild, m_TowerLayer);
-                if (colliders.Length == 0)
-                {
-                    BuildManager.Instance.GetTower(hit.point + m_Offset, m_Color);
-                }
-			}
+                RaycastHit hit;
 
-            m_CanBuilder = false;
-            m_NextCooldownTime = Time.time + m_CooldownTime;
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000.0f, m_GroundLayer))
+                {
+                    Collider[] colliders = Physics.OverlapSphere(hit.point, m_MinDistanceToBuild, m_TowerLayer);
+                    if (colliders.Length == 0)
+                    {
+
+                        if(Networking.Instance.PlayerColor == "blue")
+                        {
+                            m_Color = m_BlueColor;
+                        }
+                        else
+                        {
+                            m_Color = m_RedColor;
+                        }
+
+                        Transform towerTransform = BuildManager.Instance.GetTower(hit.point + m_Offset, m_Color); // Instancia o drone e cata o transform
+                        int droneId = towerTransform.GetComponent<TransmissionTower>().DroneId;
+                        Networking.Instance.PlaceDrone(droneId, towerTransform.position); // Envia o position (truncado no BuildManager) pela rede
+                    }
+                }
+
+                m_CanBuilder = false;
+                m_NextCooldownTime = Time.time + m_CooldownTime;
+            }
 		}
 	}
 }

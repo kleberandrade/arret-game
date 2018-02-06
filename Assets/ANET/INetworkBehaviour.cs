@@ -44,13 +44,18 @@ namespace ANET
                 // To be overriden
             }
 
+            public virtual void OnServerDisconection()
+            {
+                // To be overriden
+            }
+
             /**
              * Notifica o client que um player acabou de carregar a cena de gamplay e pode comecar a jogar.
              * Define tambem se a partida deve comecar ou aguardar outros player carregar a partida.
              * {
              *  start : bool
              * }
-             */ 
+             */
             public virtual void OnGameplayLoaded(JSONObject payload)
             {
                 // To be overriden
@@ -77,6 +82,20 @@ namespace ANET
              * }
              */
             public virtual void OnDronePlace(JSONObject payload)
+            {
+
+            }
+
+            /**
+             * Notifica o client de que um drone foi destruido
+             * {
+             *  x     : float,
+             *  y     : float,
+             *  z     : float ,  
+             *  color : string
+             * }
+             */
+            public virtual void OnDroneDestroy(JSONObject payload)
             {
 
             }
