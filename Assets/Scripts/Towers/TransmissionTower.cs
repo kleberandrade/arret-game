@@ -3,7 +3,18 @@ using UnityEngine;
 
 public class TransmissionTower : MonoBehaviour 
 {
-	public Color m_Color = Color.white;
+
+    public static int LastRedId     = 0;
+    public static int LastBlueId    = 1;
+
+    public static void IdReset()
+    {
+        LastRedId   = 0;
+        LastBlueId  = 1;
+            
+    }
+
+    public Color m_Color = Color.white;
 
 	[Range(0.0f, 1.0f)]
 	public float m_AlphaColor = 0.25f;
@@ -20,7 +31,13 @@ public class TransmissionTower : MonoBehaviour
 
     public Renderer m_ShieldRenderer;
 
+    public int DroneId;
+
+    public bool Mine = true;
+
     private List<RayLaser> m_LaserList = new List<RayLaser>();
+
+    
 
 	private void Start()
 	{
@@ -62,4 +79,9 @@ public class TransmissionTower : MonoBehaviour
 		Gizmos.color = ColorExtension.AlphaColor (m_Color, m_AlphaColor);
 		Gizmos.DrawSphere(transform.position, m_RayDistance);
 	}
+
+    public void OnClick()
+    {
+
+    }
 }
