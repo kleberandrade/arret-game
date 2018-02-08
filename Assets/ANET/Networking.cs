@@ -9,7 +9,7 @@ namespace ANET
 
     namespace Networking
     {
-
+        
         public class GameMode
         {
             public static readonly uint VR = 0;
@@ -146,6 +146,9 @@ namespace ANET
                         }else if(action == "destroyDrone")
                         {
                             BroadcastAMessage("OnDroneDestroy", payload);
+                        }else if(action == "moveAlien")
+                        {
+                            BroadcastAMessage("OnAlienMove", payload);
                         }
                     }));
                 }
@@ -233,6 +236,18 @@ namespace ANET
                 payload.AddField("action", "destroyDrone");
 
                 payload.AddField("droneId", droneId);
+
+                io.Emit("action", payload);
+            }
+
+            public void MoveAlien(Vector3 newPosition)
+            {
+                JSONObject payload = new JSONObject();
+                payload.AddField("action", "moveAlien");
+
+                payload.AddField("x", newPosition.x);
+                payload.AddField("y", newPosition.y);
+                payload.AddField("z", newPosition.z);
 
                 io.Emit("action", payload);
             }

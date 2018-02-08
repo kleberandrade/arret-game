@@ -120,6 +120,19 @@ namespace ANET
             {
 
             }
+
+            /**
+             * Notifica o client da nova posicao do alien
+             * {
+             *  x : float,
+             *  y : float,
+             *  z : float
+             * }
+             */
+            public virtual void OnAlienMove(JSONObject payload)
+            {
+
+            }
         }
     }
 }
