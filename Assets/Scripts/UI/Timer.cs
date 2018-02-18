@@ -16,6 +16,7 @@ namespace ARRET
         private int elapsedSeconds;
         private Text field = null;
         private bool started = false;
+        private Coroutine routine = null;
 
         [SerializeField]
         [Tooltip("Defines if Timer must start automatically or not. Leave unckhed so it will be initialized by OnMatchStart Event (network).")]
@@ -62,6 +63,7 @@ namespace ARRET
         {
             while(true){
                 yield return new WaitForSeconds(1);
+                Debug.Log("ClientTick");
                 if(elapsedSeconds % 15 == 0)
                 {
                     if (Networking.Instance)
@@ -78,8 +80,17 @@ namespace ARRET
             // Debug.Log("TimerStart");
             if (!started)
             {
-                StartCoroutine(IncrementTimer());
+                routine = StartCoroutine(IncrementTimer());
                 started = true;
+            }
+        }
+
+        public void TimerStop()
+        {
+            if (started)
+            {
+                StopCoroutine(routine);
+                started = false;
             }
         }
 
@@ -98,6 +109,11 @@ namespace ARRET
         public override void OnMatchStarted()
         {
             TimerStart();
+        }
+
+        public override void OnGameOver(JSONObject payload)
+        {
+            TimerStop();
         }
 
         public override void OnTick(JSONObject payload)

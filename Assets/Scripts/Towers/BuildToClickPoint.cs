@@ -3,8 +3,10 @@ using UnityEngine.UI;
 
 using ANET.Networking;
 
-public class BuildToClickPoint : MonoBehaviour 
+public class BuildToClickPoint : INetworkBehaviour 
 {
+    private bool started = false;
+
 	public LayerMask m_GroundLayer;
 
 	public LayerMask m_TowerLayer;
@@ -40,8 +42,9 @@ public class BuildToClickPoint : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         m_NextCooldownTime = Time.time + m_CooldownTime;
         if (!m_CooldownSlider)
             return;
@@ -85,7 +88,10 @@ public class BuildToClickPoint : MonoBehaviour
 
                         Transform towerTransform = BuildManager.Instance.GetTower(hit.point + m_Offset, m_Color); // Instancia o drone e cata o transform
                         int droneId = towerTransform.GetComponent<TransmissionTower>().DroneId;
-                        Networking.Instance.PlaceDrone(droneId, towerTransform.position); // Envia o position (truncado no BuildManager) pela rede
+                        if (started)
+                        {
+                            Networking.Instance.PlaceDrone(droneId, towerTransform.position); // Envia o position (truncado no BuildManager) pela rede
+                        }
                     }
                 }
 
@@ -94,4 +100,19 @@ public class BuildToClickPoint : MonoBehaviour
             }
 		}
 	}
+
+    public override void OnMatchStarted()
+    {
+        started = true;
+    }
+
+    public override void OnGameAbort(JSONObject payload)
+    {
+        started = false;
+    }
+
+    public override void OnGameOver(JSONObject payload)
+    {
+        started = false;
+    }
 }

@@ -104,4 +104,9 @@ public class SimpleMoveController : INetworkBehaviour {
     {
         matchStarted = true;
     }
+
+    public override void OnGameOver(JSONObject payload)
+    {
+        matchStarted = false;
+    }
 }
