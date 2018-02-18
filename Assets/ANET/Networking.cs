@@ -18,6 +18,12 @@ namespace ANET
 
         public class Networking : MonoBehaviour
         {
+            #region Static constants
+            public static readonly string PLAYER_COLOR_BLUE = "blue";
+            public static readonly string PLAYER_COLOR_RED = "red";
+            public static readonly string PLAYER_COLOR_NONE = "";
+            #endregion
+
             #region Static Fields
             static private Networking _instance;
             #endregion
@@ -140,12 +146,49 @@ namespace ANET
                         else if(action == "placeDrone")
                         {
                             BroadcastAMessage("OnDronePlace", payload);
-                        }else if(action == "tick")
+                        }
+                        else if(action == "tick")
                         {
                             BroadcastAMessage("OnTick", payload);
-                        }else if(action == "destroyDrone")
+                        }
+                        else if(action == "destroyDrone")
                         {
                             BroadcastAMessage("OnDroneDestroy", payload);
+                        }
+                        else if(action == "moveAlien")
+                        {
+                            BroadcastAMessage("OnAlienMove", payload);
+                        }
+                        else if (action == "gameOver")
+                        {
+                            BroadcastAMessage("OnGameOver", payload);
+
+                            if (payload.HasField("winner"))
+                            {
+                                string winner = payload.GetField("winner").str;
+                                if(winner == "vr")
+                                {
+                                    if (Host) // Se for host, pq host é o player VR nesse caso.
+                                    {
+                                        BroadcastAMessage("OnVictory", payload);
+                                    }
+                                    else
+                                    {
+                                        BroadcastAMessage("OnDefeat",null);
+                                    }
+                                }
+                                else
+                                {
+                                    if(winner == color)
+                                    {
+                                        BroadcastAMessage("OnVictory",null);
+                                    }
+                                    else
+                                    {
+                                        BroadcastAMessage("OnDefeat",null);
+                                    }
+                                }
+                            }
                         }
                     }));
                 }
@@ -169,11 +212,11 @@ namespace ANET
                     
                     if (payload != null)
                     {
-                        go.SendMessage(methodName, payload);
+                        go.SendMessage(methodName, payload,SendMessageOptions.DontRequireReceiver);
                     }
                     else
                     {
-                        go.SendMessage(methodName);
+                        go.SendMessage(methodName, SendMessageOptions.DontRequireReceiver);
                     }
                     //Debug.Log(methodName+", "+go.name);
                 }
@@ -233,6 +276,39 @@ namespace ANET
                 payload.AddField("action", "destroyDrone");
 
                 payload.AddField("droneId", droneId);
+
+                io.Emit("action", payload);
+            }
+
+            public void MoveAlien(Vector3 newPosition)
+            {
+                JSONObject payload = new JSONObject();
+                payload.AddField("action", "moveAlien");
+
+                payload.AddField("x", newPosition.x);
+                payload.AddField("y", newPosition.y);
+                payload.AddField("z", newPosition.z);
+
+                io.Emit("action", payload);
+            }
+
+            public void GameOver(string _color)
+            {
+                JSONObject payload = new JSONObject();
+                payload.AddField("action", "gameOver");
+
+                if (_color == PLAYER_COLOR_BLUE)
+                {
+                    payload.AddField("winner", "blue");
+                }
+                else if(_color == PLAYER_COLOR_RED)
+                {
+                    payload.AddField("winner", "red");
+                }
+                else
+                {
+                    payload.AddField("winner", "vr");
+                } 
 
                 io.Emit("action", payload);
             }

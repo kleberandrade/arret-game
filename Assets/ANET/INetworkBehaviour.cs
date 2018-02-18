@@ -120,6 +120,46 @@ namespace ANET
             {
 
             }
+
+            /**
+             * Notifica o client da nova posicao do alien
+             * {
+             *  x : float,
+             *  y : float,
+             *  z : float
+             * }
+             */
+            public virtual void OnAlienMove(JSONObject payload)
+            {
+
+            }
+
+            /**
+             * Notifica o client de que o game acabou e traz o resultado da partida.
+             * {
+             *  winner : "blue" | "red" | "vr"
+             * }
+             */
+            public virtual void OnGameOver(JSONObject payload)
+            {
+
+            }
+
+            /**
+             * Notifica o client de que ganhou a partida.
+             */
+            public virtual void OnVictory()
+            {
+
+            }
+
+            /**
+             * Notifica o client de que perdeu a partida.
+             */
+            public virtual void OnDefeat()
+            {
+
+            }
         }
     }
 }
