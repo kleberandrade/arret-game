@@ -13,7 +13,7 @@ public class Water : MonoBehaviour
 	public bool edgeBlend=true;
 	public bool forceFlatShading =true;
 	Mesh mesh;
-	Vector3[] verts;
+    Vector3[] verts = { Vector3.zero, Vector3.zero };
  
 	void Start ()
 	{
