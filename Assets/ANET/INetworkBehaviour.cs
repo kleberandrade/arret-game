@@ -50,6 +50,14 @@ namespace ANET
             }
 
             /**
+             * Notifica o client que o a conexão com o server foi realizada com sucesso.
+             */
+            public virtual void OnServerConnected()
+            {
+                // To be overriden
+            }
+
+            /**
              * Notifica o client que um player acabou de carregar a cena de gamplay e pode comecar a jogar.
              * Define tambem se a partida deve comecar ou aguardar outros player carregar a partida.
              * {

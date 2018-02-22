@@ -116,6 +116,11 @@ namespace ANET
                         BroadcastAMessage("OnServerDisconection", null);
                     }));
 
+                    io.On("connect", new Action<SocketIOEvent>((SocketIOEvent evt) => {
+                        BroadcastAMessage("OnServerConnected", null);
+                        Debug.Log("Successfully connected to the server.");
+                    }));
+
                     io.On("action", new Action<SocketIOEvent>((SocketIOEvent evt) => {
                         string action = evt.data.GetField("action").str;
                         JSONObject payload = evt.data.GetField("payload");

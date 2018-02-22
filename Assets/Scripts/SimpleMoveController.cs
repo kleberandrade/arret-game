@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityStandardAssets.CrossPlatformInput;
+
 using ANET.Networking;
 
 [RequireComponent(typeof(CharacterController))]
@@ -9,6 +11,9 @@ public class SimpleMoveController : INetworkBehaviour {
 
     #region Private Fields
     private bool matchStarted = false;
+
+    [SerializeField]
+    private Camera m_camera = null;
 
     [SerializeField]
     private float simpleSpeed = 5.0f;
@@ -37,6 +42,21 @@ public class SimpleMoveController : INetworkBehaviour {
         }
     }
     #endregion
+
+    public override void Start()
+    {
+        base.Start();
+        if (m_camera)
+        {
+            /**
+             * Disable head-mounted display if no gyro is available
+             */
+            if (!Input.gyro.enabled)
+            {
+                m_camera.stereoTargetEye = StereoTargetEyeMask.None; 
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -78,9 +98,9 @@ public class SimpleMoveController : INetworkBehaviour {
 
                 controller.SimpleMove(newPosition);*/
 
-                transform.Rotate(0, Input.GetAxis("Horizontal") * 1f, 0);
+                transform.Rotate(0, CrossPlatformInputManager.GetAxis("Horizontal") * 1f, 0);
                 Vector3 forward = transform.TransformDirection(Vector3.forward);
-                float curSpeed = simpleSpeed * Input.GetAxis("Vertical");
+                float curSpeed = simpleSpeed * CrossPlatformInputManager.GetAxis("Vertical");
                 controller.SimpleMove(forward * curSpeed);
             }
             else // Se ele nao for o host a posicao dele eh interpolada
@@ -90,9 +110,9 @@ public class SimpleMoveController : INetworkBehaviour {
         }
         else // Fallback para testar offline
         {
-            transform.Rotate(0, Input.GetAxis("Horizontal") * 1f, 0);
+            transform.Rotate(0, CrossPlatformInputManager.GetAxis("Horizontal") * 1f, 0);
             Vector3 forward = transform.TransformDirection(Vector3.forward);
-            float curSpeed = simpleSpeed * Input.GetAxis("Vertical");
+            float curSpeed = simpleSpeed * CrossPlatformInputManager.GetAxis("Vertical");
             controller.SimpleMove(forward * curSpeed);
         }
         
