@@ -70,18 +70,30 @@ public class SimpleMoveController : INetworkBehaviour {
         {
             if (controller && Networking.Instance.Host) // Se existir networking e o cara for o host (por que o host eh o player VR, ele que anda)
             {
-                Vector3 newPosition = new Vector3(
+                /*Vector3 newPosition = new Vector3(
                     Input.GetAxis("Horizontal"),
                     0.0f,
                     Input.GetAxis("Vertical")
                 ) * simpleSpeed;
 
-                controller.SimpleMove(newPosition);
+                controller.SimpleMove(newPosition);*/
+
+                transform.Rotate(0, Input.GetAxis("Horizontal") * 1f, 0);
+                Vector3 forward = transform.TransformDirection(Vector3.forward);
+                float curSpeed = simpleSpeed * Input.GetAxis("Vertical");
+                controller.SimpleMove(forward * curSpeed);
             }
             else // Se ele nao for o host a posicao dele eh interpolada
             {
                 transform.position = Vector3.LerpUnclamped(transform.position, moveAmount, interpolationFactor);
             }
+        }
+        else // Fallback para testar offline
+        {
+            transform.Rotate(0, Input.GetAxis("Horizontal") * 1f, 0);
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            float curSpeed = simpleSpeed * Input.GetAxis("Vertical");
+            controller.SimpleMove(forward * curSpeed);
         }
         
 	}
