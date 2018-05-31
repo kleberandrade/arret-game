@@ -15,24 +15,29 @@ public class OnGameOvered : INetworkBehaviour {
     private GameObject vrVictoryScreen = null;
     [SerializeField]
     private GameObject vrGameDefeatOverScreen = null;
+    [SerializeField]
+    private bool debug = true;
 
     private void OnGUI()
     {
-        if (Networking.Instance.Host) // Se for o host pq no nosso caso o host é o quem calcula gameOver
+        if (Networking.Instance)
         {
-            if(GUI.Button(new Rect(0,0,100,40),"Alien victory."))
+            if (Networking.Instance.Host && debug) // Se for o host pq no nosso caso o host é o quem calcula gameOver
             {
-                Networking.Instance.GameOver("vr");
-            }
+                if (GUI.Button(new Rect(0, 0, 100, 40), "Alien victory."))
+                {
+                    Networking.Instance.GameOver("vr");
+                }
 
-            if (GUI.Button(new Rect(0, (40 * 1) + (10 * 1), 100, 40), "RED victory."))
-            {
-                Networking.Instance.GameOver("red");
-            }
+                if (GUI.Button(new Rect(0, (40 * 1) + (10 * 1), 100, 40), "RED victory."))
+                {
+                    Networking.Instance.GameOver("red");
+                }
 
-            if (GUI.Button(new Rect(0, (40 * 2) + (10 * 2), 100, 40), "BLUE victory."))
-            {
-                Networking.Instance.GameOver("blue");
+                if (GUI.Button(new Rect(0, (40 * 2) + (10 * 2), 100, 40), "BLUE victory."))
+                {
+                    Networking.Instance.GameOver("blue");
+                }
             }
         }
     }

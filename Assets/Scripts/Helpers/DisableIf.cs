@@ -24,9 +24,12 @@ public class DisableIf : MonoBehaviour {
         }
         else if (disableIf == DisableIfEnum.Mobile) // Se estiver selecionado para desabilitar quando for Mobile
         {
-            if (!Networking.Instance.Host) // Se for Mobile
+            if (Networking.Instance)
             {
-                gameObject.SetActive(false); // Desabilita
+                if (!Networking.Instance.Host) // Se for Mobile
+                {
+                    gameObject.SetActive(false); // Desabilita
+                }
             }
         }
     }
