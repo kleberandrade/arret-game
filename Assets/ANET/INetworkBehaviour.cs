@@ -51,10 +51,8 @@ namespace ANET
              * para serialização de objetos JSON baseado em Dictionary. Ou seja, 
              * o conteúdo é armazenado em formato chave/valor.
              * JSONObject parseia automaticamente os tipos de dados para o mais adequado.
-             * Valores numéricos recebidos com ponto flutuante são automaticamente convertidos
-             * para float e devem ser acessados via GetFloat. Valores numéricos recebidos 
-             * sem ponto flutuante são automaticamente convertidos para int e devem ser acessados
-             * via GetFloat.
+             * Valores numéricos recebidos são automaticamente convertidos
+             * para tipo numérico e devem ser acessados via GetField. 
              * 
              * @public
              * @type {void}
@@ -69,8 +67,8 @@ namespace ANET
              * //      startgame   : bool,   // Representa se a partida deve começar ou não. Utilizado para chamar o carregamento da cena de gamplay após a GameRoom estar completa.
              * //      host        : bool    // Representa se o client atual deve se assumir como host da partida ou não.
              * //  }
-             * payload.GetBool("newuser");    // Obtém o valor do campo "newuser" do tipo {bool} do payload.
-             * payload.GetInt("totalusers");  // Obtém o valor do campo "totalusers" do tipo {int} do payload.
+             * payload.GetField("newuser").b;     // Obtém o valor do campo "newuser" do tipo {bool} do payload.
+             * payload.GetField("totalusers").n;  // Obtém o valor do campo "totalusers" do tipo {int} do payload.
              */
             public virtual void OnJoinRoom(JSONObject payload)
             {
@@ -88,21 +86,19 @@ namespace ANET
              * para serialização de objetos JSON baseado em Dictionary. Ou seja, 
              * o conteúdo é armazenado em formato chave/valor.
              * JSONObject parseia automaticamente os tipos de dados para o mais adequado.
-             * Valores numéricos recebidos com ponto flutuante são automaticamente convertidos
-             * para float e devem ser acessados via GetFloat. Valores numéricos recebidos 
-             * sem ponto flutuante são automaticamente convertidos para int e devem ser acessados
-             * via GetFloat.
+             * Valores numéricos recebidos são automaticamente convertidos
+             * para tipo numérico e devem ser acessados via GetField. 
              * 
              * @public
              * @type {void}
              * @param {JSONObject} payload Conteúdo da mensagem recebido pela rede em formato JSON.
-             *
+             * 
              * @example
              * // Layout do payload:
              * // {
              * //     errormsg : 'A player has been disconected from the game' // Mensagem de erro que ocasionou o aborto do game.
              * // }
-             * payload.GetString("errormesg");
+             * payload.GetField("errormesg").str.ToString(); // Obtém o valor do campo "errormesg" do tipo {string} do payload.
              */ 
             public virtual void OnGameAbort(JSONObject payload)
             {
@@ -139,15 +135,13 @@ namespace ANET
              * carregamento da cena de gamplay e pode comecar a jogar.
              * Define tambem se a partida deve comecar ou aguardar 
              * outros players carregarem a partida.
-             *  
+             * 
              * O payload é recebido em formato JSONObject. É uma classe
              * para serialização de objetos JSON baseado em Dictionary. Ou seja, 
              * o conteúdo é armazenado em formato chave/valor.
              * JSONObject parseia automaticamente os tipos de dados para o mais adequado.
-             * Valores numéricos recebidos com ponto flutuante são automaticamente convertidos
-             * para float e devem ser acessados via GetFloat. Valores numéricos recebidos 
-             * sem ponto flutuante são automaticamente convertidos para int e devem ser acessados
-             * via GetFloat.
+             * Valores numéricos recebidos são automaticamente convertidos
+             * para tipo numérico e devem ser acessados via GetField. 
              * 
              * @public
              * @type {void}
@@ -158,7 +152,7 @@ namespace ANET
              * // {
              * //     start : bool
              * // }
-             * payload.GetBool("start"); // Obtém o valor do campo "start" do tipo {bool} do payload. Diz se a partida deve ser iniciada ou não.
+             * payload.GetField("start").b; // Obtém o valor do campo "start" do tipo {bool} do payload. Diz se a partida deve ser iniciada ou não.
              */
             public virtual void OnGameplayLoaded(JSONObject payload)
             {
@@ -169,25 +163,24 @@ namespace ANET
              * Notifica o player atual da cor que 
              * ele deverá usar para se representar
              * na partida.
-             *  
+             * 
              * O payload é recebido em formato JSONObject. É uma classe
              * para serialização de objetos JSON baseado em Dictionary. Ou seja, 
              * o conteúdo é armazenado em formato chave/valor.
              * JSONObject parseia automaticamente os tipos de dados para o mais adequado.
-             * Valores numéricos recebidos com ponto flutuante são automaticamente convertidos
-             * para float e devem ser acessados via GetFloat. Valores numéricos recebidos 
-             * sem ponto flutuante são automaticamente convertidos para int e devem ser acessados
-             * via GetFloat.
+             * Valores numéricos recebidos são automaticamente convertidos
+             * para tipo numérico e devem ser acessados via GetField. 
              * 
              * @public
              * @type {void}
              * @param {JSONObject} payload Conteúdo da mensagem recebido pela rede em formato JSON.
              * 
              * @example
+             * // Layout do payload:
              * // {
              * //     color : string // ("blue" | "red")
              * // }
-             * payload.GetString("color"); // Obtém o valor do campo "color" do tipo {string} do payload. 
+             * payload.GetField("color").str.ToString(); // Obtém o valor do campo "color" do tipo {string} do payload. 
              */ 
             public virtual void OnColorSet(JSONObject payload)
             {
@@ -197,15 +190,13 @@ namespace ANET
             /**
              * Notifica o client de que um 
              * drone foi colocado no mapa.
-             *  
+             * 
              * O payload é recebido em formato JSONObject. É uma classe
              * para serialização de objetos JSON baseado em Dictionary. Ou seja, 
              * o conteúdo é armazenado em formato chave/valor.
              * JSONObject parseia automaticamente os tipos de dados para o mais adequado.
-             * Valores numéricos recebidos com ponto flutuante são automaticamente convertidos
-             * para float e devem ser acessados via GetFloat. Valores numéricos recebidos 
-             * sem ponto flutuante são automaticamente convertidos para int e devem ser acessados
-             * via GetFloat.
+             * Valores numéricos recebidos são automaticamente convertidos
+             * para tipo numérico e devem ser acessados via GetField. 
              * 
              * @public
              * @type {void}
@@ -220,8 +211,8 @@ namespace ANET
              * //     color   : string,   // Cor do drone que foi colocado.
              * //     droneId : int       // Id do novo drone colocado.
              * // }
-             * payload.GetFloat("x");     // Obtém o valor do campo "x" do tipo {float} do payload.
-             * payload.GetInt("droneId"); // Obtém o valor do campo "droneId" do tipo {id} do payload.
+             * payload.GetField("x").n;       // Obtém o valor do campo "x" do tipo {float} do payload.
+             * payload.GetField("droneId").n; // Obtém o valor do campo "droneId" do tipo {id} do payload.
              */
             public virtual void OnDronePlace(JSONObject payload)
             {
@@ -229,13 +220,26 @@ namespace ANET
             }
 
             /**
-             * Notifica o client de que um drone foi destruido
-             * {
-             *  x     : float,
-             *  y     : float,
-             *  z     : float ,  
-             *  color : string
-             * }
+             * Notifica o client de que 
+             * um drone foi destruido.
+             * 
+             * O payload é recebido em formato JSONObject. É uma classe
+             * para serialização de objetos JSON baseado em Dictionary. Ou seja, 
+             * o conteúdo é armazenado em formato chave/valor.
+             * JSONObject parseia automaticamente os tipos de dados para o mais adequado.
+             * Valores numéricos recebidos são automaticamente convertidos
+             * para tipo numérico e devem ser acessados via GetField. 
+             * 
+             * @public
+             * @type {void}
+             * @param {JSONObject} payload Conteúdo da mensagem recebido pela rede em formato JSON.
+             * 
+             * @example
+             * // Layout do payload:
+             * // {
+             * //     droneId : int       // Id do novo drone colocado.
+             * // }
+             * payload.GetField("droneId").n; // Obtém o valor do campo "droneId" do tipo {int} do payload.
              */
             public virtual void OnDroneDestroy(JSONObject payload)
             {
@@ -243,7 +247,11 @@ namespace ANET
             }
 
             /**
-             * Notifica o client de que a partida comecou
+             * Notifica o client 
+             * de que a partida comecou.
+             * Nenhum payload é recebido neste evento.
+             * @public
+             * @type {void}
              */
             public virtual void OnMatchStarted()
             {
@@ -251,12 +259,28 @@ namespace ANET
             }
 
             /**
-             * Notifica o client do tempo total da partida
-             * {
-             *  m : int, // minutos
-             *  s : int, // segundos
-             *  t : int  // tempo total em segundos
-             * }
+             * Notifica o client do 
+             * tempo total da partida.
+             * 
+             * O payload é recebido em formato JSONObject. É uma classe
+             * para serialização de objetos JSON baseado em Dictionary. Ou seja, 
+             * o conteúdo é armazenado em formato chave/valor.
+             * JSONObject parseia automaticamente os tipos de dados para o mais adequado.
+             * Valores numéricos recebidos são automaticamente convertidos
+             * para tipo numérico e devem ser acessados via GetField. 
+             * 
+             * @public
+             * @type {void}
+             * @param {JSONObject} payload Conteúdo da mensagem recebido pela rede em formato JSON.
+             * 
+             * @example
+             * // Layout do payload:
+             * // {
+             * //     m : int, // minutos
+             * //     s : int, // segundos
+             * //     t : int  // tempo total em segundos
+             * // }
+             * payload.GetField("t").n; // Obtém o valor do campo "t" do tipo {int} do payload.
              */
             public virtual void OnTick(JSONObject payload)
             {
@@ -264,12 +288,30 @@ namespace ANET
             }
 
             /**
-             * Notifica o client da nova posicao do alien
-             * {
-             *  x : float,
-             *  y : float,
-             *  z : float
-             * }
+             * Notifica o client da 
+             * nova posição do alien.
+             * 
+             * O payload é recebido em formato JSONObject. É uma classe
+             * para serialização de objetos JSON baseado em Dictionary. Ou seja, 
+             * o conteúdo é armazenado em formato chave/valor.
+             * JSONObject parseia automaticamente os tipos de dados para o mais adequado.
+             * Valores numéricos recebidos são automaticamente convertidos
+             * para tipo numérico e devem ser acessados via GetField. 
+             * 
+             * @public
+             * @type {void}
+             * @param {JSONObject} payload Conteúdo da mensagem recebido pela rede em formato JSON.
+             * 
+             * @example
+             * // Layout do payload:
+             * // {
+             * //     x : float,
+             * //     y : float,
+             * //     z : float
+             * // }
+             * payload.GetField("x").n; // Obtém o valor do campo "x" do tipo {float} do payload.
+             * payload.GetField("y").n; // Obtém o valor do campo "y" do tipo {float} do payload.
+             * payload.GetField("z").n; // Obtém o valor do campo "z" do tipo {float} do payload.
              */
             public virtual void OnAlienMove(JSONObject payload)
             {
@@ -277,10 +319,28 @@ namespace ANET
             }
 
             /**
-             * Notifica o client de que o game acabou e traz o resultado da partida.
-             * {
-             *  winner : "blue" | "red" | "vr"
-             * }
+             * Notifica o client de que o game 
+             * acabou e traz a representação em 
+             * string do GameMode do player que 
+             * venceu a partida.
+             * 
+             * O payload é recebido em formato JSONObject. É uma classe
+             * para serialização de objetos JSON baseado em Dictionary. Ou seja, 
+             * o conteúdo é armazenado em formato chave/valor.
+             * JSONObject parseia automaticamente os tipos de dados para o mais adequado.
+             * Valores numéricos recebidos são automaticamente convertidos
+             * para tipo numérico e devem ser acessados via GetField. 
+             * 
+             * @public
+             * @type {void}
+             * @param {JSONObject} payload Conteúdo da mensagem recebido pela rede em formato JSON.
+             * 
+             * @example
+             * // Layout do payload:
+             * // {
+             * //     winner : "blue" | "red" | "vr"
+             * // }
+             * payload.GetField("winner").str.ToString(); // Obtém o valor do campo "winner" do tipo {string} do payload.
              */
             public virtual void OnGameOver(JSONObject payload)
             {
@@ -288,7 +348,11 @@ namespace ANET
             }
 
             /**
-             * Notifica o client de que ganhou a partida.
+             * Notifica o client de 
+             * que ganhou a partida.
+             * Nenhum payload é recebido neste evento.
+             * @public
+             * @type {void}
              */
             public virtual void OnVictory()
             {
@@ -296,7 +360,11 @@ namespace ANET
             }
 
             /**
-             * Notifica o client de que perdeu a partida.
+             * Notifica o client de 
+             * que perdeu a partida.
+             * Nenhum payload é recebido neste evento.
+             * @public
+             * @type {void}
              */
             public virtual void OnDefeat()
             {
