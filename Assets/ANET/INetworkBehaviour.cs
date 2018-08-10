@@ -25,6 +25,8 @@ namespace ANET
          * ao Photon Unity Networking.
          * @public
          * @type {InetworkBehaviour}
+         * @class
+         * @extends {MonoBehaviour}
          */
         public class INetworkBehaviour : MonoBehaviour
         {

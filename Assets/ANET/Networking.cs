@@ -47,7 +47,10 @@ namespace ANET
          * de comunição de rede do ARRET. Esta classe é 
          * desenvolvida em cima da implementação de SocketIO
          * para Unity baixada da Unity Asset Store.
+         * @public
          * @type {Networking}
+         * @class
+         * @extends {MonoBehaviour}
          */
         public class Networking : MonoBehaviour
         {

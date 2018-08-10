@@ -2,6 +2,7 @@
 
 ## INetworkBehaviour : <code>InetworkBehaviour</code>
 **Kind**: global class  
+**Extends**: <code>MonoBehaviour</code>  
 **Access**: public  
 
 * [INetworkBehaviour](#INetworkBehaviour) : <code>InetworkBehaviour</code>

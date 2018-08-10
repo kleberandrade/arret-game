@@ -41,6 +41,7 @@ Constante que representa o tipo de gameplay MOBILE.Um dos jogadores controla os
 
 ## Networking : [<code>Networking</code>](#Networking)
 **Kind**: global class  
+**Extends**: <code>MonoBehaviour</code>  
 **Access**: public  
 
 * [Networking](#Networking) : [<code>Networking</code>](#Networking)
