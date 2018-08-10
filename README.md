@@ -37,5 +37,5 @@ If you are the alien find the route, do not get detected, get the source of ener
 
 ## Network API Documentation
 
-* [INetworkBehaviour](blob/master/Assets/ANET/out/INetworkBehaviour.md) class;
-* [Networking](blob/master/Assets/ANET/out/Networking.md) class;
+* [INetworkBehaviour](Assets/ANET/out/INetworkBehaviour.md) class;
+* [Networking](Assets/ANET/out/Networking.md) class;
