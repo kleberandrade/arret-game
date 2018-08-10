@@ -1,0 +1,2196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: INetworkBehaviour</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: INetworkBehaviour</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>INetworkBehaviour<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+    <h4 class="name" id="INetworkBehaviour"><span class="type-signature"></span>new INetworkBehaviour<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Adaptador de rede do jogo, recebe eventos enviadospela classe Networking, quando mensagens específicas para cada evento é recebido pela rede.A classe Networking trata estas mensagens recebidase encaminha o payload para os respectivos eventos.A maioria dos eventos recebe um parâmetro de método chamado payload.Para utilizar este adaptador basta criar um script C# e extender INetworkBehaviour ao invés de MonoBehaviour.Todo e qualquer script que extende INetworkBehaviour vai receber todos os eventos recebidos pela interface de rede.Para capturá-los basta extender o método desejado e utilizar os dados recebidos.Formato de propagação de eventos muito similar ao Photon Unity Networking.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line22">line 22</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnAlienMove"><span class="type-signature">(inner) </span>OnAlienMove<span class="signature">(payload)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Notifica o client da nova posição do alien.O payload é recebido em formato JSONObject. É uma classepara serialização de objetos JSON baseado em Dictionary. Ou seja, o conteúdo é armazenado em formato chave/valor.JSONObject parseia automaticamente os tipos de dados para o mais adequado.Valores numéricos recebidos são automaticamente convertidospara tipo numérico e devem ser acessados via GetField.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>payload</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSONObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Conteúdo da mensagem recebido pela rede em formato JSON.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line320">line 320</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Layout do payload:// {//     x : float,//     y : float,//     z : float// }payload.GetField("x").n; // Obtém o valor do campo "x" do tipo {float} do payload.payload.GetField("y").n; // Obtém o valor do campo "y" do tipo {float} do payload.payload.GetField("z").n; // Obtém o valor do campo "z" do tipo {float} do payload.</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnColorSet"><span class="type-signature">(inner) </span>OnColorSet<span class="signature">(payload)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Notifica o player atual da cor que ele deverá usar para se representarna partida.O payload é recebido em formato JSONObject. É uma classepara serialização de objetos JSON baseado em Dictionary. Ou seja, o conteúdo é armazenado em formato chave/valor.JSONObject parseia automaticamente os tipos de dados para o mais adequado.Valores numéricos recebidos são automaticamente convertidospara tipo numérico e devem ser acessados via GetField.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>payload</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSONObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Conteúdo da mensagem recebido pela rede em formato JSON.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line184">line 184</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Layout do payload:// {//     color : string // ("blue" | "red")// }payload.GetField("color").str.ToString(); // Obtém o valor do campo "color" do tipo {string} do payload. </code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnConnected"><span class="type-signature">(inner) </span>OnConnected<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line35">line 35</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnDefeat"><span class="type-signature">(inner) </span>OnDefeat<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Notifica o client de que perdeu a partida.Nenhum payload é recebido neste evento.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line376">line 376</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnDroneDestroy"><span class="type-signature">(inner) </span>OnDroneDestroy<span class="signature">(payload)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Notifica o client de que um drone foi destruido.O payload é recebido em formato JSONObject. É uma classepara serialização de objetos JSON baseado em Dictionary. Ou seja, o conteúdo é armazenado em formato chave/valor.JSONObject parseia automaticamente os tipos de dados para o mais adequado.Valores numéricos recebidos são automaticamente convertidospara tipo numérico e devem ser acessados via GetField.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>payload</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSONObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Conteúdo da mensagem recebido pela rede em formato JSON.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line245">line 245</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Layout do payload:// {//     droneId : int       // Id do novo drone colocado.// }payload.GetField("droneId").n; // Obtém o valor do campo "droneId" do tipo {int} do payload.</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnDronePlace"><span class="type-signature">(inner) </span>OnDronePlace<span class="signature">(payload)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Notifica o client de que um drone foi colocado no mapa.O payload é recebido em formato JSONObject. É uma classepara serialização de objetos JSON baseado em Dictionary. Ou seja, o conteúdo é armazenado em formato chave/valor.JSONObject parseia automaticamente os tipos de dados para o mais adequado.Valores numéricos recebidos são automaticamente convertidospara tipo numérico e devem ser acessados via GetField.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>payload</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSONObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Conteúdo da mensagem recebido pela rede em formato JSON.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line217">line 217</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Layout do payload:// {//     x       : float,    // Posição em x que o drone foi colocado.//     y       : float,    // Posição em y que o drone foi colocado.//     z       : float ,   // Posição em z que o drone foi colocado.//     color   : string,   // Cor do drone que foi colocado.//     droneId : int       // Id do novo drone colocado.// }payload.GetField("x").n;       // Obtém o valor do campo "x" do tipo {float} do payload.payload.GetField("droneId").n; // Obtém o valor do campo "droneId" do tipo {id} do payload.</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnGameAbort"><span class="type-signature">(inner) </span>OnGameAbort<span class="signature">(payload)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Notifica o client que o jogo atual foi abortado/encerrado por qualquer motivo.O server emite este evento para todos os clients conectados em uma GameRoom quando um dos clientsse desconecta em meio a uma partida.O payload é recebido em formato JSONObject. É uma classepara serialização de objetos JSON baseado em Dictionary. Ou seja, o conteúdo é armazenado em formato chave/valor.JSONObject parseia automaticamente os tipos de dados para o mais adequado.Valores numéricos recebidos são automaticamente convertidospara tipo numérico e devem ser acessados via GetField.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>payload</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSONObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Conteúdo da mensagem recebido pela rede em formato JSON.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line98">line 98</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Layout do payload:// {//     errormsg : 'A player has been disconected from the game' // Mensagem de erro que ocasionou o aborto do game.// }payload.GetField("errormesg").str.ToString(); // Obtém o valor do campo "errormesg" do tipo {string} do payload.</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnGameOver"><span class="type-signature">(inner) </span>OnGameOver<span class="signature">(payload)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Notifica o client de que o game acabou e traz a representação em string do GameMode do player que venceu a partida.O payload é recebido em formato JSONObject. É uma classepara serialização de objetos JSON baseado em Dictionary. Ou seja, o conteúdo é armazenado em formato chave/valor.JSONObject parseia automaticamente os tipos de dados para o mais adequado.Valores numéricos recebidos são automaticamente convertidospara tipo numérico e devem ser acessados via GetField.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>payload</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSONObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Conteúdo da mensagem recebido pela rede em formato JSON.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line350">line 350</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Layout do payload:// {//     winner : "blue" | "red" | "vr"// }payload.GetField("winner").str.ToString(); // Obtém o valor do campo "winner" do tipo {string} do payload.</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnGameplayLoaded"><span class="type-signature">(inner) </span>OnGameplayLoaded<span class="signature">(payload)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Notifica o client que um player finalizou o processo de carregamento da cena de gamplay e pode comecar a jogar.Define tambem se a partida deve comecar ou aguardar outros players carregarem a partida.O payload é recebido em formato JSONObject. É uma classepara serialização de objetos JSON baseado em Dictionary. Ou seja, o conteúdo é armazenado em formato chave/valor.JSONObject parseia automaticamente os tipos de dados para o mais adequado.Valores numéricos recebidos são automaticamente convertidospara tipo numérico e devem ser acessados via GetField.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>payload</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSONObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Conteúdo da mensagem recebido pela rede em formato JSON.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line155">line 155</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Layout do payload:// {//     start : bool// }payload.GetField("start").b; // Obtém o valor do campo "start" do tipo {bool} do payload. Diz se a partida deve ser iniciada ou não.</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnJoinRoom"><span class="type-signature">(inner) </span>OnJoinRoom<span class="signature">(payload)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Notifica o client que um novo jogador adentrou a sala.O payload é recebido em formato JSONObject. É uma classepara serialização de objetos JSON baseado em Dictionary. Ou seja, o conteúdo é armazenado em formato chave/valor.JSONObject parseia automaticamente os tipos de dados para o mais adequado.Valores numéricos recebidos são automaticamente convertidospara tipo numérico e devem ser acessados via GetField.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>payload</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSONObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Conteúdo da mensagem recebido pela rede em formato JSON.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line67">line 67</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Layout do payload://  {//      grid        : string, // Representa o id da GameRoom onde o client atual entrou.//      newuser     : bool,   // Diz para o jogador que entrou na sala se ele é um novo joador ou não.//      totalusers  : number, // Representa o número atualizado de jogadores na GameRoom atual.//      startgame   : bool,   // Representa se a partida deve começar ou não. Utilizado para chamar o carregamento da cena de gamplay após a GameRoom estar completa.//      host        : bool    // Representa se o client atual deve se assumir como host da partida ou não.//  }payload.GetField("newuser").b;     // Obtém o valor do campo "newuser" do tipo {bool} do payload.payload.GetField("totalusers").n;  // Obtém o valor do campo "totalusers" do tipo {int} do payload.</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnMatchStarted"><span class="type-signature">(inner) </span>OnMatchStarted<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Notifica o client de que a partida comecou.Nenhum payload é recebido neste evento.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line258">line 258</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnServerConnected"><span class="type-signature">(inner) </span>OnServerConnected<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Notifica o client que o a conexão com o server foi realizada com sucesso.Nenhum payload é recebido neste evento.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line125">line 125</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnServerDisconection"><span class="type-signature">(inner) </span>OnServerDisconection<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Notifica o client de que ele foi desconectado do server.Isto pode acontecer por qualquer motivo, o server caiu, oua conexão de internet do client foi perdida.Nenhum payload é recebido neste evento.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line112">line 112</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnTick"><span class="type-signature">(inner) </span>OnTick<span class="signature">(payload)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Notifica o client do tempo total da partida.O payload é recebido em formato JSONObject. É uma classepara serialização de objetos JSON baseado em Dictionary. Ou seja, o conteúdo é armazenado em formato chave/valor.JSONObject parseia automaticamente os tipos de dados para o mais adequado.Valores numéricos recebidos são automaticamente convertidospara tipo numérico e devem ser acessados via GetField.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>payload</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSONObject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Conteúdo da mensagem recebido pela rede em formato JSON.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line288">line 288</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Layout do payload:// {//     m : int, // minutos//     s : int, // segundos//     t : int  // tempo total em segundos// }payload.GetField("t").n; // Obtém o valor do campo "t" do tipo {int} do payload.</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~OnVictory"><span class="type-signature">(inner) </span>OnVictory<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Notifica o client de que ganhou a partida.Nenhum payload é recebido neste evento.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="INetworkBehaviour.js.html">INetworkBehaviour.js</a>, <a href="INetworkBehaviour.js.html#line363">line 363</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="GameMode.html">GameMode</a></li><li><a href="INetworkBehaviour.html">INetworkBehaviour</a></li><li><a href="Networking.html">Networking</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Aug 09 2018 21:01:27 GMT-0300 (E. South America Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
